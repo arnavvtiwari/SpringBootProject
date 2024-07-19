@@ -21,7 +21,7 @@ public class Employee {
     private String name;
     private Double salary;
     private String designation;
-    private String dob; // Changed to String
+    private String dob; 
 
     // Getters and setters
 

@@ -50,7 +50,7 @@
       </div>
       <button type="submit" class="btn btn-primary mt-3">Submit</button>
     </form>
-    <a href="home" class="btn ">Home</a>
+    <a href="employees" class="btn ">Home</a>
   </div>
 
 </body>

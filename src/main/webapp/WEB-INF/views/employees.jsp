@@ -83,6 +83,49 @@
             background-color: #f53d3d;
             color: #f2f2f2;
         }
+        a.button1 {
+            display: inline-block;
+            padding: 5px 10px;
+            text-decoration: none;
+            background-color: #666699; 
+            color: white;
+            border-radius: 5px;
+            margin-top: 10px;
+            margin-left: 80%
+        }
+        
+        a.button1:hover {
+            background-color: #8533ff;
+        }
+        a.button2 {
+            display: inline-block;
+            padding: 5px 10px;
+            text-decoration: none;
+            background-color: #666699; 
+            color: white;
+            border-radius: 5px;
+            margin-top: 10px;
+            margin-left: 5px;
+            float: right;
+            
+        }
+        
+        a.button2:hover {
+            background-color: #8533ff;
+        }
+        a.btnsm{
+        display:inline-block;
+        padding: 2px 5px;
+        background-color: #666699;
+        color:white;
+        text-decoration:none;
+        border-radius:5px;
+        margin-left:2px;
+        margin-right:2px;
+        }
+        a.btnsm:hover{
+        background-color: #8533ff;
+        }
     </style>
 </head>
 <body>
@@ -111,9 +154,29 @@
             </div>
         </c:forEach>
     </div>
+    <div>
+    
+    <c:forEach var="i" begin="1" end="${totalPages}">
+        <c:choose>
+            <c:when test="${i == currentPage}">
+                <strong>${i}</strong>
+            </c:when>
+            <c:otherwise>
+                <a href="employees?page=${i}" class="btnsm">${i}</a>
+            </c:otherwise>
+        </c:choose>
+    </c:forEach>
+     <c:if test="${currentPage > 1}">
+        <a href="employees?page=${currentPage - 1}" class="button1"><- Previous</a>
+    </c:if>
+     <c:if test="${currentPage < totalPages}">
+        <a href="employees?page=${currentPage + 1}" class="button2">Next  -></a>
+    </c:if>
+    
+</div>
 
     <a href="add" class="button button-add">Add New Employee</a><br>
-    <a href="view/10" class="button button-add">View Employee</a>
+    
     
 </body>
 </html>

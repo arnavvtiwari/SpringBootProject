@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.emp.entity.Employee;
 import com.emp.service.EmployeeService;
 
 @Controller
-//@RequestMapping("/employees")
 public class EmployeeController {
 
     @Autowired
@@ -27,9 +27,18 @@ public class EmployeeController {
     }
 
     @GetMapping("/employees")
-    public String getAllEmployees(Model model) {
-        List<Employee> employees = employeeService.getAllEmployees();
-        model.addAttribute("employees", employees);
+    public String getAllEmployees(@RequestParam(defaultValue="1") int page,Model m) {
+    	int pageSize = 5;
+    	List<Employee> employees = employeeService.getAllEmployees();
+    	int totalItems = employees.size();
+    	int totalPages = (int) Math.ceil((double) totalItems / pageSize);
+    	int start = (page - 1) * pageSize;
+        int end = Math.min(start + pageSize, totalItems);
+        List<Employee> pageList = employees.subList(start, end);
+
+        m.addAttribute("employees", pageList);
+        m.addAttribute("currentPage", page);
+        m.addAttribute("totalPages", totalPages);
         System.out.print(employees);
         
         return "employees";
