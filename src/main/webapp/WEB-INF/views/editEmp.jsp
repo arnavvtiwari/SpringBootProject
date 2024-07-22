@@ -32,6 +32,11 @@
                 <input type="text" id="name" name="name" class="form-control w-75" value="${employee.name}" required>
                 <div class="invalid-feedback">Please enter the name.</div>
             </div>
+            <div class="form-group">
+        <label for="password" class="form-label">Password</label>
+        <input name="password" type="password" class="form-control w-75" value="${employee.password}" required>
+        <div class="invalid-feedback">Please enter the password.</div>
+      </div>
             <div class="form-group mb-3">
                 <label for="salary" class="form-label">Salary</label>
                 <input type="number" id="salary" name="salary" class="form-control w-75" value="${employee.salary}" required>

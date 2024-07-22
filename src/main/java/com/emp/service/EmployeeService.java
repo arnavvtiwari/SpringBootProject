@@ -19,6 +19,10 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
 
+    public Employee findEmployeeById(Long id) {
+        return employeeRepository.findById(id).orElse(null);
+    }
+
     public Optional<Employee> getEmployeeById(Long id) {
         return employeeRepository.findById(id);
     }

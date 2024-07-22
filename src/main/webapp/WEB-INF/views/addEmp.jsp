@@ -34,6 +34,11 @@
         <div class="invalid-feedback">Please enter the name.</div>
       </div>
       <div class="form-group">
+        <label for="password" class="form-label">Password</label>
+        <input name="password" type="password" class="form-control w-75" id="password" required>
+        <div class="invalid-feedback">Please enter the password.</div>
+      </div>
+      <div class="form-group">
         <label for="salary" class="form-label">Salary</label>
         <input name="salary" type="text" class="form-control w-75" id="salary" required>
         <div class="invalid-feedback">Please enter the salary.</div>

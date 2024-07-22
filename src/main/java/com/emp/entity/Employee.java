@@ -8,10 +8,10 @@ import jakarta.persistence.Id;
 @Entity
 public class Employee {
 
-    @Override
+	@Override
 	public String toString() {
 		return "Employee [id=" + id + ", name=" + name + ", salary=" + salary + ", designation=" + designation
-				+ ", dob=" + dob + "]";
+				+ ", dob=" + dob + ", password=" + password + "]";
 	}
 
 	@Id
@@ -22,10 +22,19 @@ public class Employee {
     private Double salary;
     private String designation;
     private String dob; 
+    private String password;
 
     // Getters and setters
 
-    public Long getId() {
+    public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Long getId() {
         return id;
     }
 

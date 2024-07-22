@@ -176,6 +176,7 @@
 </div>
 
     <a href="add" class="button button-add">Add New Employee</a><br>
+    <a href="logout" class="button button-add">Logout</a><br>
     
     
 </body>

@@ -1,7 +1,6 @@
 package com.emp.controller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,11 +18,38 @@ public class EmployeeController {
 
     @Autowired
     private EmployeeService employeeService;
-    
     @GetMapping("/")
     public String home() {
     	
     	return "index";
+    }
+    @GetMapping("/logout")
+    public String logout() {
+    	flag=false;
+    	return "index";
+    }
+    boolean flag = false;
+    private boolean getAuthenticated(long id, String password) {
+    	Employee employee = employeeService.findEmployeeById(id);
+    	
+    	if(employee!=null&&employee.getPassword().equals(password)) {
+    		flag=true;
+    		return true;
+    		
+    	}
+    	return false;
+    }
+    
+    @PostMapping("/login")
+    public String login(@RequestParam("id") long id, @RequestParam("password") String password, Model m) {
+    	boolean isAuthenticated = getAuthenticated(id, password);
+    	if(isAuthenticated) {
+    		return "redirect:/employees";
+    	}
+    	m.addAttribute("error","Invalid Id or Password");
+    	return "index";
+    	
+    	
     }
 
     @GetMapping("/employees")
@@ -40,14 +66,19 @@ public class EmployeeController {
         m.addAttribute("currentPage", page);
         m.addAttribute("totalPages", totalPages);
         System.out.print(employees);
-        
-        return "employees";
+        if(flag) {
+        	return "employees";
+        }
+        return "index";
     }
 
     @GetMapping("/add")
     public String addEmployeeForm(Model model) {
         model.addAttribute("employee", new Employee());
-        return "addEmp";
+        if(flag) {
+        	return "addEmp";
+        }
+        return "index";
     }
 
     @PostMapping("/save")
@@ -60,7 +91,10 @@ public class EmployeeController {
     public String editEmployeeForm(@PathVariable Long id, Model model) {
         Employee employee = employeeService.getEmployeeById(id).orElseThrow(() -> new IllegalArgumentException("Invalid employee Id:" + id));
         model.addAttribute("employee", employee);
-        return "editEmp";
+        if(flag) {
+        	return "editEmp";
+        }
+        return "index";
     }
     
     @GetMapping("/view/{id}")
