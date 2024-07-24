@@ -18,6 +18,7 @@ public class EmployeeController {
 
     @Autowired
     private EmployeeService employeeService;
+    
     @GetMapping("/")
     public String home() {
     	
@@ -29,27 +30,34 @@ public class EmployeeController {
     	return "index";
     }
     boolean flag = false;
-    private boolean getAuthenticated(long id, String password) {
+    public boolean getAuthenticated(Long id, String password) {
     	Employee employee = employeeService.findEmployeeById(id);
     	
     	if(employee!=null&&employee.getPassword().equals(password)) {
-    		flag=true;
+    		
     		return true;
     		
     	}
     	return false;
-    }
+    } 
+    
     
     @PostMapping("/login")
-    public String login(@RequestParam("id") long id, @RequestParam("password") String password, Model m) {
+    public String login(@RequestParam("id") String strid, @RequestParam("password") String password, Model m) {
+    	
+    	Long id = Long.parseLong(strid);
     	boolean isAuthenticated = getAuthenticated(id, password);
     	if(isAuthenticated) {
+    		flag=true;
     		return "redirect:/employees";
     	}
-    	m.addAttribute("error","Invalid Id or Password");
+    	else {
+    		String err = "Invalid Id or Password";
+        	m.addAttribute("msg",err);
+    	}
     	return "index";
     	
-    	
+    	 
     }
 
     @GetMapping("/employees")
@@ -113,6 +121,6 @@ public class EmployeeController {
     @GetMapping("/delete/{id}")
     public String deleteEmployee(@PathVariable Long id) {
         employeeService.deleteEmployee(id);
-        return "redirect:/employees";
+        return "redirect:/employees"; 
     }
 }

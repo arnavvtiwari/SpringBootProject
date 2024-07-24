@@ -30,18 +30,19 @@
 <body>
   <div class="center-form">
   	<h1>Log In</h1>
-    <form action="login" method="post" class="needs-validation bg-#c2c2d6" novalidate>
+    <form action="login" method="post" class="needs-validation bg-#c2c2d6">
       <div class="form-group">
         <label for="name" class="form-label">Employee ID</label>
-        <input name="id" type="text" class="form-control w-75" id="id" required>
+        <input name="id" type="text" class="form-control w-75" id="id"  required>
         <div class="invalid-feedback">Please enter the E ID.</div>
       </div>
       <div class="form-group">
         <label for="password" class="form-label mt-3">Password</label>
-        <input name="password" type="password" class="form-control w-75" id="password" required>
+        <input name="password" type="password" class="form-control w-75" id="password">
         <div class="invalid-feedback">Please enter the password.</div>
       </div>
-      <button type="submit" class="btn btn-primary mt-3">Login</button>
+      <div style="color:red; margin-top:5px;">${msg }</div>
+      <button type="submit" class="btn btn-primary mt-2">Login</button>
       <div class="form-group">
         <a href="employees" class="btn btn-secondary mt-3 ml-auto d-block">Home</a>
     </div>
